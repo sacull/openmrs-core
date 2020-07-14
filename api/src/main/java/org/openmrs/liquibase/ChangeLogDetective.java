@@ -162,8 +162,7 @@ public class ChangeLogDetective {
 	}
 	
 	List<String> getSnapshotVersionsInDescendingOrder(Map<String, List<String>> snapshotCombinations) {
-		List<String> versions = new ArrayList<>();
-		versions.addAll(snapshotCombinations.keySet());
+		List<String> versions = new ArrayList<>(snapshotCombinations.keySet());
 		Collections.sort(versions, Collections.reverseOrder());
 		return versions;
 	}
@@ -183,11 +182,8 @@ public class ChangeLogDetective {
 		        && changeSet.getId().equals(DISABLE_FOREIGN_KEY_CHECKS) && changeSet.getAuthor().equals(BEN)) {
 			return true;
 		}
-		if (filename != null && filename.contains(LIQUIBASE_CORE_DATA_1_9_X_FILENAME)
-		        && changeSet.getId().equals(ENABLE_FOREIGN_KEY_CHECKS) && changeSet.getAuthor().equals(BEN)) {
-			return true;
-		}
-		return false;
+		return filename != null && filename.contains(LIQUIBASE_CORE_DATA_1_9_X_FILENAME)
+			&& changeSet.getId().equals(ENABLE_FOREIGN_KEY_CHECKS) && changeSet.getAuthor().equals(BEN);
 	}
 
 	/**
